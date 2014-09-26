@@ -15,6 +15,22 @@ for example, if I wanna only spend time reading articles related to an article I
 
 ```sh
 $ ./wikinet.py --help
+$ usage: wikinet.py [-h] [-c CAP] search_title search_word
+
+create a node map between a wikipedia article and linked articles in that
+article, but only if the linked article contains the positional argument
+'search_word'
+
+positional arguments:
+  search_title       The article title or keywords in article title you're
+                     looking for. No, it's not case sensitive
+  search_word        word/s to search for in linked articles
+
+optional arguments:
+  -h, --help         show this help message and exit
+  -c CAP, --cap CAP  caps the number of links processed
+$
+$ ./wikinet.py "olin college" "franklin w. olin" -c 15
 ```
 
 ### python command line:

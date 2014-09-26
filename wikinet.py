@@ -6,6 +6,7 @@ import networkx as nwx
 import argparse as ap
 import random as rand
 from bs4 import BeautifulSoup as bs
+from subprocess import call
 
 """
 create visual map of wikipedia article connected to linked articles as nodes. 
@@ -61,6 +62,7 @@ class wikinet(object):
             if 'href="/wiki/' in item and ':' not in item and title_url not in item and 'Main_Page' not in item:
                 hrefs.append(item)
         rand.shuffle(hrefs)
+        link_file = open('links.html', 'w')
         nodes = []
         for href in hrefs:
             if self.search_links(href):
@@ -74,9 +76,12 @@ class wikinet(object):
                         node[i] = ' '
                     else:
                         node[i] = href[i]
-                nodes.append(''.join(node)[start:stop])
+                node = ''.join(node)[start:stop]
+                nodes.append(node)
+                link_file.write('<a '+href[:len('href="')]+'http://en.wikipedia.org'+href[len('href="'):]+'>'+node+'</a><br>\n')
             if  len(nodes) == cap:
                 break
+        link_file.close()
         nodes.insert(0, wiki_title)
         return nodes
 
@@ -101,10 +106,9 @@ class wikinet(object):
                 font_size = 10,
                 labels = labels
                 )
-
+        call(["firefox", "links.html"])       
         mplot.axis('off')
         mplot.show()
-            
 
 if __name__=="__main__":
     

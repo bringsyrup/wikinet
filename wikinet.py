@@ -88,7 +88,7 @@ class wikinet(object):
     def network(self, cap=None):
         nodes = self.create_nodes(cap)
         G=nwx.balanced_tree(len(nodes)-1,1)
-        pos=nwx.graphviz_layout(G,prog='twopi',args='')
+        pos=nwx.graphviz_layout(G,prog='neato',args='')
         labels = {}
         for i in range(len(nodes)):
             labels[i] = nodes[i]
@@ -103,7 +103,7 @@ class wikinet(object):
             )
         nwx.draw_networkx_labels(G,
                 pos,
-                font_size = 10,
+                font_size = 12,
                 labels = labels
                 )
         call(["firefox", "links.html"])       

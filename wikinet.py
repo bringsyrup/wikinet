@@ -63,8 +63,7 @@ class wikinet(object):
         rand.shuffle(hrefs)
         nodes = []
         for href in hrefs:
-            include = self.search_links(href)
-            if include == True:
+            if self.search_links(href):
                 node = [' ']*len(href)
                 for i in range(len(href)):
                     if href[i] == '/':

@@ -30,7 +30,6 @@ positional arguments:
 optional arguments:
   -h, --help         show this help message and exit
   -c CAP, --cap CAP  caps the number of links processed
-$
 $ ./wikinet.py "olin college" "franklin w. olin" -c 15
 ```
 

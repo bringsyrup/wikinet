@@ -5,97 +5,107 @@ import pattern.web as pweb
 import networkx as nwx
 import argparse as ap
 import random as rand
+from bs4 import BeautifulSoup as bs
 
 """
 create visual map of wikipedia article connected to linked articles as nodes. 
 a link is only shown if the linked article contains the given searchword
 """
 
-def get_title(search_title):
-    '''
-    return the actual title from wikipedia from search
-    '''
-    try:
-        wiki_title = pweb.Wikipedia().search(search_title)
-    except TypeError:
-        print "error: search must be string"
-        return
-    wiki_title = str(wiki_title)
-    for n in range(len(wiki_title)):
-        if wiki_title[n] == "=":
-            wiki_title = wiki_title[n+3:-2]
-            break
-    return wiki_title
- 
-def search_links(href, search_word):
-    link = href[len('href="'):-1]
-    article = pweb.plaintext(pweb.URL('https://en.wikipedia.org' + link).download())
-    if search_word.lower() in article.lower():
-        return True
-    else:
-        return False
+class wikinet(object):
 
-def create_nodes(search_title, search_word, cap=None):
-    wiki_title = get_title(search_title)
-    title_url = [' ']*len(wiki_title)
-    for i in range(len(wiki_title)):
-        if wiki_title[i] == ' ':
-            title_url[i] = '_'
+    def __init__(self, search_title, search_word):
+        try:
+            search_title = str(search_title)
+            search_word = str(search_word)
+        except ValueError:
+            print "ValueError: arguments must be strings or callable by str()"
+            return
+        self.search_title = search_title
+        self.search_word = search_word
+
+    def get_title(self):
+        '''
+        return the actual title from wikipedia from search
+        '''
+        wiki_title = pweb.Wikipedia().search(self.search_title)
+        wiki_title = str(wiki_title)
+        for n in range(len(wiki_title)):
+            if wiki_title[n] == "=":
+                wiki_title = wiki_title[n+3:-2]
+                break
+        return wiki_title
+     
+    def search_links(self, href):
+        link = href[len('href="'):-1]
+        raw = bs(pweb.plaintext(pweb.URL('https://en.wikipedia.org' + link).download()))
+        article = str(raw.get_text)
+        if self.search_word.lower() in article.lower():
+            return True
         else:
-            title_url[i] = wiki_title[i]
-    title_url = ''.join(title_url)
-    wiki_url = 'https://en.wikipedia.org/wiki/Special:WhatLinksHere/' + title_url
-    hrefs = []
-    html = pweb.URL(wiki_url).download().split()
-    for item in html:
-        if 'href="/wiki/' in item and ':' not in item and title_url not in item and 'Main_Page' not in item:
-            hrefs.append(item)
-    rand.shuffle(hrefs)
-    nodes = []
-    for href in hrefs:
-        include = search_links(href, search_word)
-        if include == True:
-            node = [' ']*len(href)
-            for i in range(len(href)):
-                if href[i] == '/':
-                    start = i+1
-                elif href[i] == '"':
-                    stop = i
-                if href[i] == '_':
-                    node[i] = ' '
-                else:
-                    node[i] = href[i]
-            nodes.append(''.join(node)[start:stop])
-        if  len(nodes) == cap:
-            break
-    nodes.insert(0, wiki_title)
-    return nodes
+            return False
 
-def network(search_title, search_word, cap=None):
-    nodes = create_nodes(search_title, search_word, cap)
-    G=nwx.balanced_tree(len(nodes)-1,1)
-    pos=nwx.graphviz_layout(G,prog='twopi',args='')
-    labels = {}
-    for i in range(len(nodes)):
-        labels[i] = nodes[i]
-    nwx.draw(G,
-        pos,
-        node_size=[800] + [300]*(len(nodes)),
-        alpha=0.3,
-        node_color = "blue",
-        edge_color = "black",
-        linewidths = 0,
-        labels=False
-        )
-    nwx.draw_networkx_labels(G,
+    def create_nodes(self, cap=None):
+        wiki_title = self.get_title()
+        title_url = [' ']*len(wiki_title)
+        for i in range(len(wiki_title)):
+            if wiki_title[i] == ' ':
+                title_url[i] = '_'
+            else:
+                title_url[i] = wiki_title[i]
+        title_url = ''.join(title_url)
+        wiki_url = 'https://en.wikipedia.org/wiki/Special:WhatLinksHere/' + title_url
+        hrefs = []
+        html = pweb.URL(wiki_url).download().split()
+        for item in html:
+            if 'href="/wiki/' in item and ':' not in item and title_url not in item and 'Main_Page' not in item:
+                hrefs.append(item)
+        rand.shuffle(hrefs)
+        nodes = []
+        for href in hrefs:
+            include = self.search_links(href)
+            if include == True:
+                node = [' ']*len(href)
+                for i in range(len(href)):
+                    if href[i] == '/':
+                        start = i+1
+                    elif href[i] == '"':
+                        stop = i
+                    if href[i] == '_':
+                        node[i] = ' '
+                    else:
+                        node[i] = href[i]
+                nodes.append(''.join(node)[start:stop])
+            if  len(nodes) == cap:
+                break
+        nodes.insert(0, wiki_title)
+        return nodes
+
+    def network(self, cap=None):
+        nodes = self.create_nodes(cap)
+        G=nwx.balanced_tree(len(nodes)-1,1)
+        pos=nwx.graphviz_layout(G,prog='twopi',args='')
+        labels = {}
+        for i in range(len(nodes)):
+            labels[i] = nodes[i]
+        nwx.draw(G,
             pos,
-            font_size = 10,
-            labels = labels
+            node_size=[800] + [300]*(len(nodes)),
+            alpha=0.3,
+            node_color = "blue",
+            edge_color = "black",
+            linewidths = 0,
+            labels=False
             )
+        nwx.draw_networkx_labels(G,
+                pos,
+                font_size = 10,
+                labels = labels
+                )
 
-    mplot.axis('off')
-    mplot.show()
-        
+        mplot.axis('off')
+        mplot.show()
+            
 
 if __name__=="__main__":
     
@@ -117,7 +127,9 @@ if __name__=="__main__":
             )
     args = parser.parse_args()
 
+    wikigraph = wikinet(args.search_title, args.search_word)
+
     if args.cap:
-        network(args.search_title, args.search_word, args.cap)
+        wikigraph.network(args.cap)
     else:
-        network(args.search_title, args.search_word)
+        wikigraph.network()

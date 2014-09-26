@@ -1,7 +1,7 @@
 # wikipedia article visual mapping
 
-ever done that thing where you click on all the links in a wikipedia article and soon your browser is super full and you don't remember which ones cam from where, and you're not even sure which ones are really relevent to what you're trying to read about?
-this tool allows you to see the hyperlinked articles in an article mapped to that article in a visual map, but you can control which links are represented with a search word/phrase.
+ever done that thing where you click on all the links in a wikipedia article and soon your browser is super full and you don't remember which ones came from where, and you're not even sure which ones are really relevent to what you're trying to read about?
+this tool allows you to see the hyperlinked articles in an article mapped to that article in a visual map, and you can control which links are represented with a search word/phrase.
 
 for example, if I only wanna spend time reading articles linked in an article I'm reading AND only having to do with opossums, I could filter all the links for the word opossum, or something related to opossums like "opossum mating rituals".
 

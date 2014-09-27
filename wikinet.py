@@ -2,19 +2,22 @@
 
 import matplotlib.pyplot as mplot
 import pattern.web as pweb
-import networkx as nwx
+import networkx as nx
 import argparse as ap
 import random as rand
 from bs4 import BeautifulSoup as bs
 from subprocess import call
 
 """
-create visual map of wikipedia article connected to linked articles as nodes. 
-a link is only shown if the linked article contains the given searchword
+create visual map of a wikipedia article connected to hyperlinked articles as nodes.
+a linked article is only represented if that article contains the given searchword.
+additionally, a web browser page (default firefox) is launched containing the hyperlinks.
 """
 
 class wikinet(object):
-
+    '''
+    class for creating visual map and browser page conataining hyperlinks 
+    '''
     def __init__(self, search_title, search_word):
         try:
             search_title = str(search_title)
@@ -27,7 +30,7 @@ class wikinet(object):
 
     def get_title(self):
         '''
-        return the actual title from wikipedia from search
+        return best match wikipedia article title from search_title
         '''
         wiki_title = pweb.Wikipedia().search(self.search_title)
         wiki_title = str(wiki_title)
@@ -38,6 +41,10 @@ class wikinet(object):
         return wiki_title
      
     def search_links(self, href):
+        '''
+        called by create_nodes to filter out articles not containing search_word.
+        returns a bool for every hyperlink in main article
+        '''
         link = href[len('href="'):-1]
         raw = bs(pweb.plaintext(pweb.URL('https://en.wikipedia.org' + link).download()))
         article = str(raw.get_text)
@@ -47,6 +54,9 @@ class wikinet(object):
             return False
 
     def create_nodes(self, cap=None):
+        '''
+        returns list of node labels
+        '''
         wiki_title = self.get_title()
         title_url = [' ']*len(wiki_title)
         for i in range(len(wiki_title)):
@@ -86,26 +96,30 @@ class wikinet(object):
         return nodes
 
     def network(self, cap=None):
+        '''
+        creates visual map from nodes and launches browser page with hyperlinks
+        '''
         nodes = self.create_nodes(cap)
-        G=nwx.balanced_tree(len(nodes)-1,1)
-        pos=nwx.graphviz_layout(G,prog='neato',args='')
+        G = nx.balanced_tree(len(nodes)-1,1)
+        pos = nx.graphviz_layout(G)
         labels = {}
         for i in range(len(nodes)):
             labels[i] = nodes[i]
-        nwx.draw(G,
+        nx.draw(G,
             pos,
-            node_size=[800] + [300]*(len(nodes)),
-            alpha=0.3,
+            node_size=[900] + [200]*(len(nodes)),
+            alpha=0.2,
             node_color = "blue",
             edge_color = "black",
             linewidths = 0,
             labels=False
             )
-        nwx.draw_networkx_labels(G,
+        nx.draw_networkx_labels(G,
                 pos,
                 font_size = 12,
                 labels = labels
                 )
+        '''to change default web browser change line below'''
         call(["firefox", "links.html"])       
         mplot.axis('off')
         mplot.show()
@@ -113,7 +127,7 @@ class wikinet(object):
 if __name__=="__main__":
     
     parser = ap.ArgumentParser(
-            description = "create a node map between a wikipedia article and linked articles in that article, but only if the linked article contains the positional argument 'search_word'"
+            description = "create a node map between a wikipedia article and linked articles in that article, but only if the linked article contains the positional argument 'search_word'. also launches browser page (default firefox) containing hyperlinks articles"
             )
     parser.add_argument("search_title",
             type = str,

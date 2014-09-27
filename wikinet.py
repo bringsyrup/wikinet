@@ -127,7 +127,7 @@ class wikinet(object):
 if __name__=="__main__":
     
     parser = ap.ArgumentParser(
-            description = "create a node map between a wikipedia article and linked articles in that article, but only if the linked article contains the positional argument 'search_word'. also launches browser page (default firefox) containing hyperlinks articles"
+            description = "create a node map between a wikipedia article and linked articles in that article, but only if the linked article contains the positional argument 'search_word'. also launches browser page (default firefox) containing hyperlinked articles"
             )
     parser.add_argument("search_title",
             type = str,

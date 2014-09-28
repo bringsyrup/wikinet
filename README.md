@@ -14,11 +14,17 @@ unfortunately, the wikinet class uses a lot of not-so-common libraries that you 
 	- pip install pattern
  - beautiful soup (home page [here)](http://www.crummy.com/software/BeautifulSoup/)
 	- pip install beautifulsoup4
- - matplotlib (tar file found [here](http://matplotlib.org/downloads.html) if you want to compile from source) 
+ - matplotlib (tar file [here](http://matplotlib.org/downloads.html) if you want to compile from source) 
 	- pip install matplotlib
- - networkx (get tar file [here)](https://pypi.python.org/pypi/networkx/)
  - random (probably installed by default)
  - subprocess32 (tar file [here)](https://pypi.python.org/pypi/subprocess32/)
+
+ here's the difficult one:
+
+ - networkx (tar file [here)](https://pypi.python.org/pypi/networkx/)
+        - requires pygraphviz (tar file [here)]() which in turn requires Graphviz (tar file [here)](http://graphviz.org/Download_source.php).
+	- in ubuntu, you should install Graphviz with `sudo apt-get install graphviz`
+	- other linux/osx may need to install from source, which is tricky with graphviz. for my installation, I had to edit pygraphviz source code to pass an exception. google is your friend.
 
 
 ## ways to use it:

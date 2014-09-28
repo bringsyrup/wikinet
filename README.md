@@ -39,7 +39,8 @@ usage: wikinet.py [-h] [-c CAP] search_title search_word
 
 create a node map between a wikipedia article and linked articles in that
 article, but only if the linked article contains the positional argument
-'search_word'
+'search_word'. also launches browser page (default firefox) containing
+hyperlinked articles
 
 positional arguments:
   search_title       The article title or keywords in article title you're
@@ -61,4 +62,4 @@ after adding the wikinet dir to your python path, or running python from inside 
 >>> from wikinet import wikinet
 >>> olinNet = wikinet("olin college", "franklin w. olin")
 >>> olinNet.network(15)
-```
+`

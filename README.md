@@ -18,7 +18,7 @@ unfortunately, the wikinet class uses a lot of not-so-common libraries that you 
 	- pip install matplotlib
  - subprocess32 (tar file [here](https://pypi.python.org/pypi/subprocess32/))
 
- here's the difficult one:
+here's the difficult one:
 
  - networkx (tar file [here](https://pypi.python.org/pypi/networkx/))
         - requires pygraphviz (tar file [here](https://pypi.python.org/pypi/pygraphviz)) which in turn requires Graphviz (tar file [here](http://graphviz.org/Download_source.php)).

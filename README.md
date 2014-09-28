@@ -8,21 +8,20 @@ for example, if I only wanna spend time reading articles linked in an article I'
 the end result of running the command line interface is a png showing the visual map, and a firefox window containing the hyperlinks so you can actually go to the filtered links. to change this functionality to use your preferred browser, replace the `call(['firefox','links.html'])` input found in wikinet's `network` method with the appropriate terminal command for your browser.
 ## dependencies:
 
-unfortunately, the wikinet class uses a lot of not-so-common libraries that you probably don't have.
+unfortunately, the wikinet class uses a lot of not-so-common libraries that you might don't have.
 
- - pattern (github [here)](https://github.com/clips/pattern)
+ - pattern (github [here](https://github.com/clips/pattern))
 	- pip install pattern
- - beautiful soup (home page [here)](http://www.crummy.com/software/BeautifulSoup/)
+ - beautiful soup (home page [here](http://www.crummy.com/software/BeautifulSoup/))
 	- pip install beautifulsoup4
- - matplotlib (tar file [here](http://matplotlib.org/downloads.html) if you want to compile from source) 
+ - matplotlib (tar file [here](http://matplotlib.org/downloads.html)) 
 	- pip install matplotlib
- - random (probably installed by default)
- - subprocess32 (tar file [here)](https://pypi.python.org/pypi/subprocess32/)
+ - subprocess32 (tar file [here](https://pypi.python.org/pypi/subprocess32/))
 
  here's the difficult one:
 
- - networkx (tar file [here)](https://pypi.python.org/pypi/networkx/)
-        - requires pygraphviz (tar file [here)]() which in turn requires Graphviz (tar file [here)](http://graphviz.org/Download_source.php).
+ - networkx (tar file [here](https://pypi.python.org/pypi/networkx/))
+        - requires pygraphviz (tar file [here](https://pypi.python.org/pypi/pygraphviz)) which in turn requires Graphviz (tar file [here](http://graphviz.org/Download_source.php)).
 	- in ubuntu, you should install Graphviz with `sudo apt-get install graphviz`
 	- other linux/osx may need to install from source, which is tricky with graphviz. for my installation, I had to edit pygraphviz source code to pass an exception. google is your friend.
 

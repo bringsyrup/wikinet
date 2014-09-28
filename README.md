@@ -11,15 +11,15 @@ the end result of running the command line interface is a png showing the visual
 unfortunately, the wikinet class uses a lot of not-so-common libraries that you probably don't have.
 
  - pattern (github [here)](https://github.com/clips/pattern)
-	pip install pattern
+	- pip install pattern
  - beautiful soup (home page [here)](http://www.crummy.com/software/BeautifulSoup/)
-	pip install beautifulsoup4
+	- pip install beautifulsoup4
  - matplotlib (tar file found [here](http://matplotlib.org/downloads.html) if you want to compile from source) 
-	pip install matplotlib
+	- pip install matplotlib
  - networkx (you'll need to install som dependencies for this one, pay attention to console output)
-	pip install networkx
+	- pip install networkx
  - random (probably installed by default)
- - subprocess32 (tar file [here](https://pypi.python.org/pypi/subprocess32/)
+ - subprocess32 (tar file [here)](https://pypi.python.org/pypi/subprocess32/)
 
 
 ## ways to use it:

@@ -6,7 +6,7 @@ import networkx as nx
 import argparse as ap
 import random as rand
 from bs4 import BeautifulSoup as bs
-from subprocess import call
+from subprocess32 import call
 
 """
 create visual map of a wikipedia article connected to hyperlinked articles as nodes.

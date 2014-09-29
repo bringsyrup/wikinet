@@ -29,6 +29,8 @@ here's the difficult one:
 ## ways to use it:
 ### terminal interface:
 
+ - check/modify/remove the shebang  
+
  - make wikinet.py executable (or not)
 
  - look at your options with --help!

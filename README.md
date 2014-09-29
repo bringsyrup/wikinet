@@ -1,9 +1,9 @@
 # wikipedia article visual mapping
 
 ever done that thing where you click on all the links in a wikipedia article and soon your browser is super full and you don't remember which ones came from where, and you're not even sure which ones are really relevent to what you're trying to read about?
-this tool allows you to see the hyperlinked articles in an article mapped to that article in a visual map, and you can control which links are represented with a search word/phrase.
+this tool allows you to see the hyperlinked articles in an article mapped to that article in a visual map, and you can control which links are represented with search words/phrases.
 
-for example, if I only wanna spend time reading articles linked in an article I'm reading AND only having to do with opossums, I could filter all the links for the word opossum, or something related to opossums like "opossum mating rituals".
+for example, if I only wanna spend time reading articles linked in an article I'm reading AND only having to do with opossums, I could filter all the links for the word opossum, or something related to opossums like "opossum mating rituals" or even "'oppossum mating rituals' 'beautiful trees'".
 
 the end result of running the command line interface is a png showing the visual map, and a firefox window containing the hyperlinks so you can actually go to the filtered links. to change this functionality to use your preferred browser, replace the `call(['firefox','links.html'])` input found in wikinet's `network` method with the appropriate terminal command for your browser.
 ## dependencies:
@@ -45,7 +45,7 @@ hyperlinked articles
 positional arguments:
   search_title       The article title or keywords in article title you're
                      looking for. No, it's not case sensitive
-  filters        word/s to search for in linked articles
+  filters            word/s to search for in linked articles
 
 optional arguments:
   -h, --help         show this help message and exit

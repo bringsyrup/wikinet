@@ -17,6 +17,7 @@ unfortunately, the wikinet class uses a lot of not-so-common libraries that you 
  - matplotlib (tar file [here](http://matplotlib.org/downloads.html)) 
 	- pip install matplotlib
  - subprocess32 (tar file [here](https://pypi.python.org/pypi/subprocess32/))
+ - re and random (installed with python by default)
 
 here's the difficult one:
 

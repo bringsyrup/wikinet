@@ -10,20 +10,20 @@ the end result of running the command line interface is a png showing the visual
 
 unfortunately, the wikinet class uses a lot of not-so-common libraries that you might don't have.
 
- - pattern (github [here](https://github.com/clips/pattern))
+- pattern (github [here](https://github.com/clips/pattern))
 	- pip install pattern
- - beautiful soup (home page [here](http://www.crummy.com/software/BeautifulSoup/))
+- beautiful soup (home page [here](http://www.crummy.com/software/BeautifulSoup/))
 	- pip install beautifulsoup4
- - matplotlib (tar file [here](http://matplotlib.org/downloads.html)) 
+- matplotlib (tar file [here](http://matplotlib.org/downloads.html)) 
 	- pip install matplotlib
- - subprocess32 (tar file [here](https://pypi.python.org/pypi/subprocess32/))
+- subprocess32 (tar file [here](https://pypi.python.org/pypi/subprocess32/))
 
- here's the difficult one:
+here's the difficult one:
 
-	- networkx (tar file [here](https://pypi.python.org/pypi/networkx/))
-        	- requires pygraphviz (tar file [here](https://pypi.python.org/pypi/pygraphviz)) which in turn requires Graphviz (tar file [here](http://graphviz.org/Download_source.php)).
-		- in ubuntu, you should install Graphviz with `sudo apt-get install graphviz`
-		- other linux/osx may need to install from source, which is tricky with graphviz. for my installation, I had to edit pygraphviz source code to pass an exception. google is your friend.
+- networkx (tar file [here](https://pypi.python.org/pypi/networkx/))
+       	- requires pygraphviz (tar file [here](https://pypi.python.org/pypi/pygraphviz)) which in turn requires Graphviz (tar file [here](http://graphviz.org/Download_source.php)).
+	- in ubuntu, you should install Graphviz with `sudo apt-get install graphviz`
+	- other linux/osx may need to install from source, which is tricky with graphviz. for my installation, I had to edit pygraphviz source code to pass an exception. google is your friend.
 
 
 ## ways to use it:

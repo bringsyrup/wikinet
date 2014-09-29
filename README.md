@@ -21,9 +21,9 @@ unfortunately, the wikinet class uses a lot of not-so-common libraries that you 
 here's the difficult one:
 
 - networkx (tar file [here](https://pypi.python.org/pypi/networkx/))
-       	- requires pygraphviz (tar file [here](https://pypi.python.org/pypi/pygraphviz)) which in turn requires Graphviz (tar file [here](http://graphviz.org/Download_source.php)).
+	- requires pygraphviz (tar file [here](https://pypi.python.org/pypi/pygraphviz)) which in turn requires Graphviz (tar file [here](http://graphviz.org/Download_source.php))
 	- in ubuntu, you should install Graphviz with `sudo apt-get install graphviz`
-	- other linux/osx may need to install from source, which is tricky with graphviz. for my installation, I had to edit pygraphviz source code to pass an exception. google is your friend.
+	- other linux/osx may need to install from source, which is tricky with graphviz. for my installation, I had to edit pygraphviz source code to pass an exception. google is your friend
 
 
 ## ways to use it:

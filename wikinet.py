@@ -33,12 +33,7 @@ class wikinet(object):
         '''
         return best match wikipedia article title from search_title
         '''
-        wiki_title = pweb.Wikipedia().search(self.search_title)
-        wiki_title = str(wiki_title)
-        for n in range(len(wiki_title)):
-            if wiki_title[n] == "=":
-                wiki_title = wiki_title[n+3:-2]
-                break
+        wiki_title = str(pweb.Wikipedia().search(self.search_title))[25:-2]
         return wiki_title
      
     def search_links(self, href, split=False):
